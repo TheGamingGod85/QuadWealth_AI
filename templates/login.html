@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST" action="/login">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br><br>
+        <input type="submit" value="Login" class="button-submit">
+    </form>
+</body>
+</html>

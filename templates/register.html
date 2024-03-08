@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="POST" action="/register">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br>
+        <label for="bank_balance">Current Bank Balance</label><br>
+        <input type="number" id="bank_balance" name="bank_balance" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br><br>
+        <label for="password">Repeat Password</label><br>
+        <input type="password" id="repeated_password" name="repeated_password" required style="width: 20%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #6200ff; border-radius: 4px;"><br><br>
+        <input type="submit" value="Register" class="button-submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,434 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    text-decoration-line: underline;
+}
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+tr.holiday {
+    background-color: red;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    display: inline-flex;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+li input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+li label {
+    font-weight: bold;
+}
+
+.button-submit {
+    margin-top: 20px;
+    padding: 10px 180px;
+    display: inline-flex;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button-submit:hover {
+    background-color: #45a049;
+}
+
+.button-delete {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.button-delete:hover {
+    background-color: #ff0707;
+}
+
+.button-calculate {
+    padding: 10px 180px;
+    font-size: 16px;
+    background-color: #0099f8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.button-calculate:hover {
+    background-color: #0073ff;
+}
+
+.button-guidance {
+    padding: 10px 180px;
+    font-size: 16px;
+    background-color: #9900f8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.button-guidance:hover {
+    background-color: #7f00c4;
+}
+
+input[type="date"] {
+    /* Change font, color, border, padding, etc. */
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #0073ff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-right: 20px;
+}
+  
+input[type="date"]:focus {
+    /* Style when the input is focused */
+    border-color: #ff0707;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+    /* Change font, color, border, padding, etc. */
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #0073ff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input {
+    /* Change font, color, border, padding, etc. */
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #0073ff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+  
+input[type="number"]:focus {
+    /* Style when the input is focused */
+    border-color: #ff0707;
+    outline: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+select {
+    /* Change font, color, border, padding, etc. */
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #0073ff;
+    border-radius: 4px;
+    padding: 10px 80px;
+    background-color: #fff;
+    margin-right: 20px;
+}
+  
+textarea {
+    /* Change font, color, border, padding, etc. */
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #0073ff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    resize: none;
+    height: 75px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+textarea:focus {
+    /* Style when the input is focused */
+    border-color: #ff0707;
+    outline: none;
+    resize: none;
+}
+
+
+
+select:focus {
+    /* Style when the input is focused */
+    border-color: #ff0707;
+    outline: none;
+}
+
+
+.main-routine-table tr:nth-child(6n) {
+    border-bottom: 5px solid red;
+}
+
+
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Modified CSS for sub-driver dropdown */
+.sub-driver-container {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#subDriver {
+    margin-left: 20px; /* Add some spacing between the main driver and sub-driver dropdowns */
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+p {
+    height: 100px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+.creditsCard {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    background: #ff0033;
+    padding: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 5px solid #7f00c4;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+#dashboard-table tr:first-child {
+    border-top: none;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container button {
+    margin: 10px;
+    flex-basis: calc(50% - 20px);
+    text-align: center;
+}
+  
+.financial_guidance {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    width: 65%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+
+.grid2x2 {
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.grid2x2 > div {
+    display: flex; 
+    flex-basis: calc(50% - 40px);  
+    justify-content: center;
+    flex-direction: column;
+}
+.grid2x2 > div > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.box { 
+    margin: 20px;
+}
+
+.button-reminder {
+    margin-top: 20px;
+    padding: 10px 180px;
+    display: inline-flex;
+    font-size: 16px;
+    background-color: #ff7e0c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button-reminder:hover {
+    background-color: #ff6a00;
+}
+
+.button-record {
+    padding: 10px 180px;
+    font-size: 16px;
+    background-color: #0091f8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.button-record:hover {
+    background-color: #0073ff;
+}
+
+.button-goal {
+    padding: 10px 180px;
+    font-size: 16px;
+    background-color: #00ee53;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button-goal:hover {
+    background-color: #00d14e;
+}
+
+.button {
+    margin: 15px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: auto auto;
+}

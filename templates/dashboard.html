@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome, {{ current_user.id }} To The Budget Tracker</h1>
+    
+    <div class="button">
+        <button onclick="openModal('billModal')" class="button-reminder button">Set Bill Reminder</button>
+        <button onclick="openModal('goalModal')" class=" button-goal button">Set Financial Goal</button>
+        <button onclick="openModal('addRecordModal')" class="button-record button">Add Record</button>    
+        <form action="{{ url_for('aiguidance') }}" method="post">
+            <button type="submit" class="button-guidance button">Get AI Guidance</button>
+        </form>  
+    </div>
+
+      
+    
+
+    <div id="billModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('billModal')">&times;</span>
+            <h2>Set Bill Reminder</h2>
+            <form action="/set_bill_reminder" method="post">
+                <label for="bill_name">Bill Name:</label>
+                <input type="text" id="bill_name" name="bill_name" required>
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                
+                <label for="due_date">Due Date:</label>
+                <input type="date" id="due_date" name="due_date" required>
+    
+                <label for="recurrence">Recurrence:</label>
+                <select id="recurrence" name="recurrence">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <!-- Add more options for other recurrence frequencies if needed -->
+                </select><br><br>
+    
+                <button type="submit" class="button-submit">Set Reminder</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for setting financial goal -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('goalModal')">&times;</span>
+            <h2>Set Financial Goal</h2>
+            <!-- Form to set a financial goal -->
+            <form action="/set_goal" method="post">
+                <label for="goal_name">Goal Name:</label>
+                <input type="text" id="goal_name" name="goal_name" required>
+                <label for="target_amount">Target Amount:</label>
+                <input type="number" id="target_amount" name="target_amount" required>
+                <label for="earnings_goal">Time Frame (Years)</label>
+                <input type="number" id="time_goal" name="time_goal" required>
+                <button type="submit" class="button-submit">Set Goal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding record -->
+    <div id="addRecordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addRecordModal')">&times;</span>
+            <h2>Add Record</h2>
+            <form action="{{ url_for('add_entry') }}" method="post">
+                <div style="margin-left: auto; margin-right: auto;">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                    <label for="type">Type:</label>
+                    <select id="type" name="type">
+                        <option disabled default selected value>select an option</option>
+                        <option value="credit">Credit</option>
+                        <option value="debit">Debit</option>
+                    </select>
+                    <label for="reason">Reason:</label>
+                    <select id="reason" name="reason" required>
+                        <option disabled default selected value>select an option</option>
+                        <option value="salary">Salary</option>
+                        <option value="rent">Rent</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="vehicle">Vehicle & Fuel</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                    <div style="padding: 25px;">
+                        <label for="description">Description:</label><br>
+                        <textarea id="description" name="description" rows="4" cols="50" maxlength="200" required></textarea>
+                    </div><br>
+                    <input type="submit" value="Add Entry" class="button-submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <form method="get" action="{{ url_for('logout') }}" class="logout-form">
+        <button type="submit" class="button-delete">Logout</button>
+    </form>
+    <h2>Budget Records</h2>
+    <table id="dashboard-table">
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Reason</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.get('Date') }}</td>
+            <td>{{ record.get('type') }}</td>
+            <td>{{ record.get('amount') }}</td>
+            <td>{{ record.get('reason') }}</td>
+            <td>{{ record.get('description') }}</td>
+            <td>
+                <form action="/delete_record/{{ record.id }}" method="post">
+                    <button type="submit" class="button-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <h2>Bill Reminders</h2>
+    <table>
+        <tr>
+            <th>Bill Name</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Recurrence</th>
+            <th>Action</th>
+        </tr>
+        {% for reminder in reminders %}
+        <tr>
+            <td>{{ reminder.bill_name }}</td>
+            <td>{{ reminder.amount }}</td>
+            <td>{{ reminder.due_date }}</td>
+            <td>{{ reminder.recurrence }}</td>
+            <td>
+                <form action="/delete_bill_reminder/{{ reminder.bill_name }}" method="post">
+                    <button type="submit" class="button-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Table to display financial goals -->
+    <h2>Financial Goals</h2>
+    <table>
+        <tr>
+            <th>Goal Name</th>
+            <th>Target Amount</th>
+            <th>Remaining Amount To Earn</th>
+            <th>Time Frame (Years)</th>
+            <th>Action</th>
+        </tr>
+        {% for goal in goals %}
+        <tr>
+            <td>{{ goal.goal_name }}</td>
+            <td>{{ goal.target_amount }}</td>
+            <td>{{ remaining_goal }}</td>
+            <td>{{ goal.time }}</td> 
+            <td>
+                <form action="/delete_goal/{{ goal.goal_name }}" method="post">
+                    <button type="submit" class="button-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th>Current Balance</th>
+            <th>Total Earnings</th>
+            <th>Total Expenses</th>
+        </tr>
+        <tr>
+            <td>{{ current_balance }}</td>
+            <td>{{ earnings }}</td>
+            <td>{{ expenses }}</td>
+    </table>
+    <br><br><br>    
+    <script>
+        // Get the table element
+        var table = document.getElementById("dashboard-table");
+    
+        // Iterate through each row in the table starting from the second row
+        for (var i = 2; i < table.rows.length; i++) {
+            // Get the current and previous row dates
+            var currentDate = new Date(table.rows[i].cells[0].innerText);
+            var prevDate = new Date(table.rows[i - 1].cells[0].innerText);
+    
+            // Check if the month changes between previous and current rows
+            if (prevDate.getMonth() !== currentDate.getMonth()) {
+                // Add border-bottom to the previous row
+                table.rows[i - 1].style.borderBottom = "3px solid red";
+            }
+        }
+    </script>
+    <script>
+        // Function to open modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        // Function to close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+    </script>
+     
+    
+</body>
+</html>

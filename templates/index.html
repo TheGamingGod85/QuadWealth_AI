@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Budget Tracker</h1>
+        <p>This budget tracker is your one-stop shop for managing your money effectively.  
+            Easily set and track your spending, analyze your habits, and achieve your financial goals.  
+            Our user-friendly interface makes it simple to record income and expenses, 
+            categorize your spending, and gain valuable insights into your financial health.</p>
+        <h2>Use the buttons below to Register or Login:</h2>
+        <form action="/login" method="GET">
+            <button type="submit" class="button-submit">Login</button>
+        </form>
+        <form action="/register" method="GET">
+            <button type="submit" class="button-calculate">Register</button>
+        </form>
+
+    </div>
+</body>
+</html>
