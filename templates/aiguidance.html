@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>Financial Guidance</h1>
+    <form method="get" action="{{ url_for('dashboard') }}" class="logout-form">
+        <button type="submit" class="button-delete">Back</button>
+    </form>
     <div class="financial_guidance">
         {{ guidance | safe }}
     </div>
