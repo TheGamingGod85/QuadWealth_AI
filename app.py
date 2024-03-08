@@ -14,6 +14,7 @@ app = Flask(__name__)   # Create a Flask app
 app.secret_key = 'uLKrvX,c*!gvkP7]~hRvo6H+:r"5PzD12"MMC#5s+[hO>PbByA=@{Q1=MampaB)'  # Set a secret key for the app
 
 
+
 # Initialize Flask-Login
 login_manager = LoginManager()  # Create a LoginManager instance
 login_manager.init_app(app) # Initialize the LoginManager instance
