@@ -6,7 +6,6 @@ Project Description
 
 ### Todo
 
-- [ ] Generates a requirements.txt  
 - [ ] HTML and Logic for forgot Password  
 
 ### In Progress
@@ -16,6 +15,7 @@ Project Description
 
 ### Done ✓
 
+- [x] Generates a requirements.txt  
 - [x] Dashboard logic and html  
 - [x] Login, Register Logic and HTML  
 
