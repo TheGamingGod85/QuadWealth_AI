@@ -425,10 +425,15 @@ p {
     background-color: #00d14e;
 }
 
-.button {
-    margin: 15px;
+.button-container {
     display: grid;
-    align-content: center;
+    align-items: center;
     justify-content: center;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, auto);
+    gap: 15px;
+
+}
+
+.button {
+    width: 100%; /* Ensure buttons take full width of their container */
 }

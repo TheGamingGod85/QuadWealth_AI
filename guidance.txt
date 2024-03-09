@@ -1,31 +1,36 @@
-<b>Financial Records</b>
+<b>Total Inflow:</b>
 
-<li>Current balance: INR 12,299</li>
+<li>Salary (March): INR 100,000</li>
+<li>Salary (April): INR 100,000</li>
+<li>Total Inflow: INR 200,000</li>
 
-<b>Total Inflow (without detailed breakdown)</b>
+<b>Total Outflow:</b>
 
-<p>Insufficient data provided to determine total inflow.</p>
+<li>Groceries: INR 8,000</li>
+<li>Rent: INR 15,000</li>
+<li>Bike EMI: INR 250</li>
+<li>Total Outflow: INR 23,250</li>
 
-<b>Total Outflow (without detailed breakdown)</b>
+<b>Reminders:</b>
 
-<p>Insufficient data provided to determine total outflow.</p>
+<li>Bike EMI due on 2024-04-07: INR 250</li>
 
-<b>Reminders</b>
+<b>Goals:</b>
 
-<li><b>Set a budget:</b> Track expenses regularly to identify areas where spending can be reduced.</li>
-<li><b>Review expenses regularly:</b> Examine bank statements and receipts to ensure there are no unnecessary or excessive expenses.</li>
-<li><b>Negotiate bills:</b> Contact service providers (e.g., phone, internet, utilities) to inquire about potential discounts or payment plans.</li>
+<li><b>Car:</b></li>
+    * Target amount: INR 1,500,000
+    * Time frame: 3 years
+    * Monthly savings required: INR 41,666.67
+    * Current savings: INR 0
+    * Additional savings needed: INR 41,666.67 per month
 
-<b>Goals</b>
+<b>Saving Money Efficiently:</b>
 
-<li><b>Create an emergency fund:</b> Aim to save 3-6 months of essential expenses in an easily accessible savings account. Estimated amount: INR 30,000 - 60,000.</li>
-<li><b>Invest for retirement:</b> Utilize long-term investment options such as mutual funds or stocks to accumulate funds for the future. Estimated monthly contribution: INR 1,000 - 2,500.</li>
-<li><b>Short-term savings goal:</b> Determine a specific savings goal (e.g., a vacation, new appliance) and set a target amount and timeline. Estimated amount: INR 10,000 - 50,000.</li>
-
-<b>Saving Money Efficiently</b>
-
-<li><b>Use cash or debit cards instead of credit cards:</b> Avoid potential overspending and credit card debt.</li>
-<li><b>Take advantage of discounts and coupons:</b> Research and use coupons, promo codes, and loyalty programs to reduce expenses.</li>
-<li><b>Negotiate purchases:</b> Ask for discounts on items or services to lower costs.</li>
-<li><b>Consider generic brands:</b> Switch to generic products for items such as groceries and toiletries without sacrificing quality.</li>
-<li><b>Cook meals at home:</b> Eating out can be expensive; prepare meals at home to save money on dining expenses.</li>
+<li><b>Track expenses:</b> Use a budgeting app or spreadsheet to monitor your spending and identify areas where you can cut back.</li>
+<li><b>Negotiate bills:</b> Contact your service providers (e.g., phone, internet) to negotiate lower rates.</li>
+<li><b>Cook meals at home:</b> Eating out can be expensive. Prepare meals at home to save money.</li>
+<li><b>Shop around for groceries:</b> Compare prices at different grocery stores to find the best deals.</li>
+<li><b>Use public transportation:</b> If possible, use public transportation instead of driving to save on gas and car maintenance costs.</li>
+<li><b>Consider a side hustle:</b> Explore ways to earn additional income through a part-time job or freelance work.</li>
+<li><b>Automate savings:</b> Set up automatic transfers from your checking account to a savings account on a regular basis.</li>
+<li><b>Set financial goals:</b> Having specific financial goals will motivate you to save and make wise financial decisions.</li>

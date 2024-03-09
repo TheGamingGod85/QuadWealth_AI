@@ -5,6 +5,7 @@ from firebase_admin import credentials, firestore
 from datetime import datetime, timedelta
 import base64
 import re
+import webview
 import google.generativeai as genai
 
 
@@ -12,6 +13,11 @@ import google.generativeai as genai
 # Initialize Flask app
 app = Flask(__name__)   # Create a Flask app
 app.secret_key = 'uLKrvX,c*!gvkP7]~hRvo6H+:r"5PzD12"MMC#5s+[hO>PbByA=@{Q1=MampaB)'  # Set a secret key for the app
+
+
+
+# Create window for webview
+window = webview.create_window("QuadBudget AI", app)
 
 
 
@@ -29,34 +35,32 @@ db = firestore.client() # Create an instance of the Firestore client
 
 
 # Define the Generative AI model
-genai.configure(api_key="AIzaSyCS665Uk0Ttvppz43y2i35DBcjGIVgeHzg")  # Set the API key for the Generative AI service
+genai.configure(api_key="AIzaSyB5b3yOq6uW3V32P5WeCEDuU-KSGP1hfbU")  # Set the API key for the Generative AI service
 generation_config = {
-  "temperature": 0.9,
+  "temperature": 1,
   "top_p": 1,
   "top_k": 1,
-  "max_output_tokens": 2048,
+  "max_output_tokens": 4096,
 }   # Set the generation configuration for the Generative AI service
 safety_settings = [
   {
     "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": "BLOCK_ONLY_HIGH"
   },
   {
     "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": "BLOCK_ONLY_HIGH"
   },
   {
     "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": "BLOCK_ONLY_HIGH"
   },
   {
     "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    "threshold": "BLOCK_ONLY_HIGH"
   },
 ]   # Set the safety settings for the Generative AI service
-model = genai.GenerativeModel(model_name="gemini-1.0-pro", 
-                              generation_config=generation_config, 
-                              safety_settings=safety_settings)    # Create an instance of the Generative AI model
+model = genai.GenerativeModel(model_name="gemini-1.0-pro-001", generation_config=generation_config, safety_settings=safety_settings)    # Create an instance of the Generative AI model
 
 
 
@@ -429,3 +433,5 @@ def aiguidance():   # Define the aiguidance function
 
 if __name__ == '__main__':  # If the script is executed
     app.run(debug=True) # Run the app in debug mode
+    # webview.start()  # Start webview
+    # app.run(host='0.0.0.0', port=5000)  # Run the app on port 5000

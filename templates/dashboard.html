@@ -8,15 +8,17 @@
 </head>
 <body>
     <h1>Welcome, {{ current_user.id }} To QuadWealth AI</h1>
-    
-    <div class="button">
+    <div class="button-container">
         <button onclick="openModal('billModal')" class="button-reminder button">Set Bill Reminder</button>
         <button onclick="openModal('goalModal')" class=" button-goal button">Set Financial Goal</button>
-        <button onclick="openModal('addRecordModal')" class="button-record button">Add Record</button>    
-        <form action="{{ url_for('aiguidance') }}" method="post">
+        <form action="{{ url_for('aiguidance') }}" method="post" style="margin-top: 20px;">
             <button type="submit" class="button-guidance button">Get AI Guidance</button>
-        </form>  
+        </form>
+
+        <button onclick="openModal('addRecordModal')" class="button-record button">Add Record</button>
+
     </div>
+    
 
       
     
@@ -222,7 +224,6 @@
             document.getElementById(modalId).style.display = "none";
         }
     </script>
-     
     
 </body>
 </html>
