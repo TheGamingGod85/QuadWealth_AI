@@ -79,14 +79,15 @@ def load_user(user_id): # Define the load_user function
 
 
 def add_record(user_id, bill_name, due_date, amount):   # Define the add_record function
-    record_ref = db.collection('users').document(user_id).collection('records').document()  # Create a reference to the record document
-    record_ref.set({
-        'Date': due_date,
-        'type': 'debit',  # Assuming bill reminder is a debit
-        'amount': amount,      
-        'reason': bill_name,
-        'description': 'Automatically generated record for bill: ' + bill_name
-    })  # Set the fields of the record document
+    if datetime.strptime(due_date, '%Y-%m-%d') < datetime.now():    # If the due date has passed
+        record_ref = db.collection('users').document(user_id).collection('records').document()  # Create a reference to the record document
+        record_ref.set({
+            'Date': due_date,
+            'type': 'debit',  # Assuming bill reminder is a debit
+            'amount': amount,      
+            'reason': bill_name,
+            'description': 'Automatically generated record for bill: ' + bill_name
+        })  # Set the fields of the record document
 
 
 
@@ -113,7 +114,7 @@ def register(): # Define the register function
         email = request.form['email']   # Get the email from the form
         password = request.form['password']     # Get the password from the form
         password_confirm = request.form['repeated_password']    # Get the repeated password from the form
-        bank_balance = request.form['bank_balance']  # Get the bank balance from the form
+        bank_balance = float(request.form['bank_balance'])  # Get the bank balance from the form
         pass64 = base64.b64encode(password.encode("utf-8")) # Encode the password using base64
         
         # Check if passwords match

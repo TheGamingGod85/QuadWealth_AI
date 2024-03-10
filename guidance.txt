@@ -1,36 +1,23 @@
-<b>Total Inflow:</b>
+<b>Financial Summary</b>
 
-<li>Salary (March): INR 100,000</li>
-<li>Salary (April): INR 100,000</li>
-<li>Total Inflow: INR 200,000</li>
+<b>Total Inflow:</b> This information is not provided in your financial records.
 
-<b>Total Outflow:</b>
+<b>Total Outflow:</b> 2,000 (Monthly Bills and EMIs)
 
-<li>Groceries: INR 8,000</li>
-<li>Rent: INR 15,000</li>
-<li>Bike EMI: INR 250</li>
-<li>Total Outflow: INR 23,250</li>
+<b>Reminders</b>
 
-<b>Reminders:</b>
+<li>Your monthly bills and EMIs total 2,000 INR. To ensure you have sufficient funds to cover these expenses, it's recommended to set aside this amount in a dedicated account.</li>
 
-<li>Bike EMI due on 2024-04-07: INR 250</li>
+<b>Goals</b>
 
-<b>Goals:</b>
+<li>You have a goal of saving 1,500,000 INR within 4 years for a car.</li>
+<li>Based on these assumptions, you need to save approximately 375,000 INR per year or 31,250 INR per month.</li>
 
-<li><b>Car:</b></li>
-    * Target amount: INR 1,500,000
-    * Time frame: 3 years
-    * Monthly savings required: INR 41,666.67
-    * Current savings: INR 0
-    * Additional savings needed: INR 41,666.67 per month
+<b>Saving Money Efficiently</b>
 
-<b>Saving Money Efficiently:</b>
-
-<li><b>Track expenses:</b> Use a budgeting app or spreadsheet to monitor your spending and identify areas where you can cut back.</li>
-<li><b>Negotiate bills:</b> Contact your service providers (e.g., phone, internet) to negotiate lower rates.</li>
-<li><b>Cook meals at home:</b> Eating out can be expensive. Prepare meals at home to save money.</li>
-<li><b>Shop around for groceries:</b> Compare prices at different grocery stores to find the best deals.</li>
-<li><b>Use public transportation:</b> If possible, use public transportation instead of driving to save on gas and car maintenance costs.</li>
-<li><b>Consider a side hustle:</b> Explore ways to earn additional income through a part-time job or freelance work.</li>
-<li><b>Automate savings:</b> Set up automatic transfers from your checking account to a savings account on a regular basis.</li>
-<li><b>Set financial goals:</b> Having specific financial goals will motivate you to save and make wise financial decisions.</li>
+<li><b>Review your expenses:</b> Track your spending habits to identify areas where you can reduce unnecessary expenses. Consider using a budgeting app or spreadsheet to monitor your cash flow.</li>
+<li><b>Negotiate bills:</b> Contact service providers, such as your mobile carrier or internet provider, to negotiate lower rates or payment plans.</li>
+<li><b>Cook at home:</b> Prepare home-cooked meals instead of dining out to significantly reduce food expenses.</li>
+<li><b>Shop around for insurance:</b> Compare premiums from different insurance companies to find the best deals on health, car, or home insurance.</li>
+<li><b>Take advantage of discounts and promotions:</b> Utilize coupons, loyalty programs, and sales to save money on purchases.</li>
+<li><b>Consider a side hustle:</b> Start a small business or take on a part-time job to supplement your income and accelerate your savings.</li>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <img src="../static/img.png" alt="Top Left Image" class="top-left-image">
     <h1>Welcome, {{ current_user.id }} To QuadWealth AI</h1>
     <div class="button-container">
         <button onclick="openModal('billModal')" class="button-reminder button">Set Bill Reminder</button>
@@ -19,10 +20,6 @@
 
     </div>
     
-
-      
-    
-
     <div id="billModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('billModal')">&times;</span>

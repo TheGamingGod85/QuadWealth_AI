@@ -318,18 +318,19 @@ p {
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 5px solid #a200ff;
     width: 80%;
+    border-radius: 20px;
 }
 .close {
-    color: #aaa;
+    color: #f10000;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 .close:hover,
 .close:focus {
-    color: black;
+    color: #980000;
     text-decoration: none;
     cursor: pointer;
 }
@@ -436,4 +437,13 @@ p {
 
 .button {
     width: 100%; /* Ensure buttons take full width of their container */
+}
+
+
+.top-left-image {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
 }
