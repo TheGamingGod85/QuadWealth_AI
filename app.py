@@ -527,15 +527,11 @@ def aiguidance():   # Define the aiguidance function
     guidance = format_text_to_html(response.text)   # Format the response text to HTML
 
 
-    with open('guidance.txt', 'w', encoding='utf-8') as file:   # Open the guidance.txt file in write mode
-        file.write(guidance)    # Write the guidance to the file
-
-
     return render_template('aiguidance.html', guidance=guidance)    # Render the aiguidance.html template
 
 
 
 if __name__ == '__main__':  # If the script is executed
-    app.run(debug=True) # Run the app in debug mode
-    # webview.start()  # Start webview
+    # app.run(debug=True) # Run the app in debug mode
+    webview.start()  # Start webview
     # app.run(host='0.0.0.0', port=5000)  # Run the app on port 5000
