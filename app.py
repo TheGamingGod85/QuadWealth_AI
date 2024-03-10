@@ -25,7 +25,7 @@ app.secret_key = 'uLKrvX,c*!gvkP7]~hRvo6H+:r"5PzD12"MMC#5s+[hO>PbByA=@{Q1=MampaB
 
 
 # Create window for webview
-window = webview.create_window("QuadBudget AI", app)
+window = webview.create_window("QuadBudget AI", app)    
 
 
 
