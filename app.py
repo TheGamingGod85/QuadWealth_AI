@@ -1,13 +1,13 @@
 import os
+import base64
+import re
+import webview
+import pyotp
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime, timedelta
-import base64
-import re
-import webview
-import pyotp
 import google.generativeai as genai
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -99,7 +99,7 @@ def add_record(user_id, bill_name, due_date, amount):   # Define the add_record 
 
 
 
-def format_text_to_html(text):
+def format_text_to_html(text):  # Define the format_text_to_html function
     formatted_text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)   # Replace ** with <b> and </b>
     formatted_text = re.sub(r'^\* (.*?)$', r'<li>\1</li>', formatted_text, flags=re.MULTILINE)  # Replace * with <li> and </li>
     formatted_text = re.sub(r'^(\d+)\. (.*?)$', r'<li>\1. \2</li>', formatted_text, flags=re.MULTILINE) # Replace 1. with <li> and </li>
@@ -131,8 +131,8 @@ def send_email(username, email, password, totp_secret): # Define the send_email 
     # Construct email message
     message = MIMEMultipart()   # Create a MIMEMultipart instance
     message['to'] = email   # Set the to field of the message
-    message['subject'] = "User Information"  # Set the subject of the message
-    email_body = f"Username: {username}\nEmail: {email}\nPassword: {password}\nTOTP Secret: {totp_secret}"  # Set the email body
+    message['subject'] = "Registration Details"  # Set the subject of the message
+    email_body = f"Here are your Details for the app 'QuadWealth AI', Keep Them Safely:\nUsername: {username}\nEmail: {email}\nPassword: {password}\nTOTP Secret: {totp_secret}\nUse the Above TOTP Secret With a Authenticator App. If this Secret Gets Lost, You'll loose your 'Account'"  # Set the email body
     message.attach(MIMEText(email_body, 'plain'))   # Attach the email body to the message
     
     raw_message = base64.urlsafe_b64encode(message.as_bytes())  # Encode the message using base64
