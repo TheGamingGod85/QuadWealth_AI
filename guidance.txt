@@ -1,23 +1,29 @@
-<b>Financial Summary</b>
+<b>Total Inflow</b>
 
-<b>Total Inflow:</b> This information is not provided in your financial records.
+<p>The total inflow for the given period without a detailed breakdown is:</p>
+<li>Salary:  INR 100,000</li>
 
-<b>Total Outflow:</b> 2,000 (Monthly Bills and EMIs)
+<b>Total Outflow</b>
+
+<p>The total outflow for the given period without a detailed breakdown is:</p>
+<li>Rent: INR 5,000</li>
 
 <b>Reminders</b>
 
-<li>Your monthly bills and EMIs total 2,000 INR. To ensure you have sufficient funds to cover these expenses, it's recommended to set aside this amount in a dedicated account.</li>
+<li><b>Upcoming Bill:</b> Bike EMI of INR 1,000 is due on 2024-03-28.</li>
 
 <b>Goals</b>
 
-<li>You have a goal of saving 1,500,000 INR within 4 years for a car.</li>
-<li>Based on these assumptions, you need to save approximately 375,000 INR per year or 31,250 INR per month.</li>
+<li><b>Car Savings:</b> You have a goal to save INR 1,500,000 for a car within 4 years. To achieve this, you need to save INR 32,500 per month (1,500,000 / (4 x 12)).</li>
+<li><b>Savings Calculation:</b> You are currently saving INR 0 towards this goal.</li>
 
 <b>Saving Money Efficiently</b>
 
-<li><b>Review your expenses:</b> Track your spending habits to identify areas where you can reduce unnecessary expenses. Consider using a budgeting app or spreadsheet to monitor your cash flow.</li>
-<li><b>Negotiate bills:</b> Contact service providers, such as your mobile carrier or internet provider, to negotiate lower rates or payment plans.</li>
-<li><b>Cook at home:</b> Prepare home-cooked meals instead of dining out to significantly reduce food expenses.</li>
-<li><b>Shop around for insurance:</b> Compare premiums from different insurance companies to find the best deals on health, car, or home insurance.</li>
-<li><b>Take advantage of discounts and promotions:</b> Utilize coupons, loyalty programs, and sales to save money on purchases.</li>
-<li><b>Consider a side hustle:</b> Start a small business or take on a part-time job to supplement your income and accelerate your savings.</li>
+<li><b>Review Your Rent:</b> Explore options to negotiate a lower rent or consider relocating to a more affordable location.</li>
+<li><b>Monitor Spending:</b> Track your expenses regularly to identify areas where you can cut back on unnecessary purchases.</li>
+<li><b>Automate Savings:</b> Set up automatic transfers from your checking account to a dedicated savings account to ensure regular deposits towards your goal.</li>
+<li><b>Consider Side Hustles:</b> Explore opportunities to earn extra income through part-time jobs or side hustles.</li>
+<li><b>Negotiate Bills:</b> Contact your service providers to negotiate lower rates on bills such as internet, phone, and utilities.</li>
+<li><b>Meal Planning:</b> Plan your meals in advance to reduce impulse purchases and save money on groceries.</li>
+<li><b>Use Discounts and Coupons:</b> Take advantage of discounts, coupons, and sales offers to save on everyday items.</li>
+<li><b>Avoid Unnecessary Debt:</b> Limit your use of credit cards and avoid taking on new debt unless absolutely necessary.</li>

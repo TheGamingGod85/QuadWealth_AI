@@ -12,12 +12,24 @@
     <div class="button-container">
         <button onclick="openModal('billModal')" class="button-reminder button">Set Bill Reminder</button>
         <button onclick="openModal('goalModal')" class=" button-goal button">Set Financial Goal</button>
+        <button onclick="openModal('addRecordModal')" class="button-record button">Add Record</button>
         <form action="{{ url_for('aiguidance') }}" method="post" style="margin-top: 20px;">
             <button type="submit" class="button-guidance button">Get AI Guidance</button>
         </form>
+    </div>
+    <button onclick="openModal('totpmodal')" class="totp-form button-totp">Show TOTP Secret</button>
 
-        <button onclick="openModal('addRecordModal')" class="button-record button">Add Record</button>
-
+    <div id="totpmodal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('totpmodal')">&times;</span>
+            <h2>Enter Password</h2>
+            <form id="passwordForm" onsubmit="submitForm(event)">
+                <label for="totp">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="button-submit">Submit</button>
+            </form>
+            <div id="result"></div> <!-- This div will display the result -->
+        </div>
     </div>
     
     <div id="billModal" class="modal">
@@ -101,11 +113,11 @@
             </form>
         </div>
     </div>
-
-
+    
     <form method="get" action="{{ url_for('logout') }}" class="logout-form">
         <button type="submit" class="button-delete">Logout</button>
     </form>
+
     <h2>Budget Records</h2>
     <table id="dashboard-table">
         <tr>
@@ -222,5 +234,30 @@
         }
     </script>
     
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+            var password = document.getElementById('password').value;
+    
+            // Make an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/verifypass', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('result').innerText = xhr.responseText; // Update result div with the response
+                } else {
+                    console.log('Request failed. Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send('password=' + encodeURIComponent(password)); // Send password as POST data
+        }
+    
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+    </script>
+
+
 </body>
 </html>

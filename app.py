@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import firebase_admin
@@ -6,7 +7,14 @@ from datetime import datetime, timedelta
 import base64
 import re
 import webview
+import pyotp
 import google.generativeai as genai
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 
 
@@ -28,7 +36,7 @@ login_manager.init_app(app) # Initialize the LoginManager instance
 
 
 # Initialize Firestore
-cred = credentials.Certificate('quadbudget.json')   # Use the service account key JSON file to initialize the app
+cred = credentials.Certificate('quadbudget-db.json')   # Use the service account key JSON file to initialize the app
 firebase_admin.initialize_app(cred) # Initialize the app with the credentials
 db = firestore.client() # Create an instance of the Firestore client
 
@@ -101,6 +109,45 @@ def format_text_to_html(text):
 
 
 
+def send_email(username, email, password, totp_secret): # Define the send_email function
+    SCOPES = ['https://www.googleapis.com/auth/gmail.send'] # Set the scopes for the Gmail API
+
+    # Get Gmail service
+    creds = None    # Initialize the creds variable to None
+    if os.path.exists('token.json'):    # If the token.json file exists
+        creds = Credentials.from_authorized_user_file('token.json')   # Get the credentials from the token.json file
+    if not creds or not creds.valid:    # If the credentials are not valid
+        if creds and creds.expired and creds.refresh_token:   # If the credentials are expired and a refresh token exists
+            creds.refresh(Request())    # Refresh the credentials
+        else:   # If the credentials are not expired or a refresh token does not exist
+            flow = InstalledAppFlow.from_client_secrets_file(   # Create a flow from the client secrets file
+                'quadbudget-mail.json', SCOPES)   # Use the SCOPES list
+            creds = flow.run_local_server(port=0)   # Run the flow on a local server
+        with open('token.json', 'w') as token:  # Open the token.json file in write mode
+            token.write(creds.to_json())    # Write the credentials to the file
+
+    service = build('gmail', 'v1', credentials=creds)   # Build the Gmail service
+
+    # Construct email message
+    message = MIMEMultipart()   # Create a MIMEMultipart instance
+    message['to'] = email   # Set the to field of the message
+    message['subject'] = "User Information"  # Set the subject of the message
+    email_body = f"Username: {username}\nEmail: {email}\nPassword: {password}\nTOTP Secret: {totp_secret}"  # Set the email body
+    message.attach(MIMEText(email_body, 'plain'))   # Attach the email body to the message
+    
+    raw_message = base64.urlsafe_b64encode(message.as_bytes())  # Encode the message using base64
+    raw_message = raw_message.decode()  # Decode the message
+    
+    service.users().messages().send(userId='me', body={'raw': raw_message}).execute()   # Send the email
+
+
+
+def totp_verify(otp, totp_secret):  # Define the totp_verify function
+    totp = pyotp.TOTP(totp_secret)  # Create a TOTP object with the totp_secret
+    return totp.verify(otp) # Verify the OTP against the secret
+
+
+
 @app.route('/') # Define the route for the index page
 def index():    # Define the index function
     return render_template('index.html')    # Render the index.html template
@@ -116,6 +163,7 @@ def register(): # Define the register function
         password_confirm = request.form['repeated_password']    # Get the repeated password from the form
         bank_balance = float(request.form['bank_balance'])  # Get the bank balance from the form
         pass64 = base64.b64encode(password.encode("utf-8")) # Encode the password using base64
+        totp_secret = pyotp.random_base32()    # Generate a random base32 secret for TOTP
         
         # Check if passwords match
         if password == password_confirm:    # If the password and repeated password match
@@ -128,8 +176,12 @@ def register(): # Define the register function
                 'username': username,
                 'email': email,
                 'password': pass64,
-                'bank_balance': bank_balance
+                'bank_balance': bank_balance,
+                'totp_secret': totp_secret
             })  # Set the fields of the user document
+
+            send_email(username, email, password, totp_secret)  # Send an email to the user with their TOTP secret
+
             return redirect(url_for('index'))   # Redirect to the index page
         else:   # If the password and repeated password do not match
             return 'Passwords do not match. Please try again.'  # Return a message indicating that the passwords do not match
@@ -151,11 +203,42 @@ def login():    # Define the login function
         if not user_doc.exists or user_doc.to_dict()['password'] != pass64: # If the user document does not exist or the password is incorrect
             return 'Invalid username or password'   # Return a message indicating that the username or password is invalid
         
-        # Create a User instance and pass it to login_user
-        user = User(user_id=username)  # Assuming User class expects user_id in its constructor
-        login_user(user)    # Log the user in
-        return redirect(url_for('dashboard'))   # Redirect to the dashboard page
+        totp_secret = user_doc.to_dict()['totp_secret']  # Get the totp_secret field from the user document
+        if totp_verify(request.form['totp'], totp_secret):  # If the OTP is verified
+            # Create a User instance and pass it to login_user
+            user = User(user_id=username)  # Assuming User class expects user_id in its constructor
+            login_user(user)    # Log the user in
+            return redirect(url_for('dashboard'))   # Redirect to the dashboard page
+        else:   # If the OTP is not verified
+            return 'Invalid OTP'    # Return a message indicating that the OTP is invalid
+        
     return render_template('login.html')    # Render the login.html template
+
+
+
+@app.route('/forgot_password', methods=['GET', 'POST'])    # Define the route for the forgot password page
+def forgot_password():  # Define the forgot_password function
+    if request.method == 'POST':    # If the request method is POST
+        username = request.form['username']  # Get the username from the form
+        email = request.form['email']   # Get the email from the form
+        new_password = request.form['new_password']   # Get the new password from the form
+
+        user_ref = db.collection('users').document(username)    # Create a reference to the user document
+        user_doc = user_ref.get()   # Get the user document
+        totp_secret = user_doc.to_dict()['totp_secret']  # Get the totp_secret field from the user document
+        
+        if user_doc.exists: # If the user document exists
+            if user_doc.to_dict()['email'] == email:    # If the email address matches the email address in the user document
+                if totp_verify(request.form['totp'], totp_secret):  # If the OTP is verified
+                    user_ref.update({'password': base64.b64encode(new_password.encode("utf-8"))})  # Update the password field of the user document
+                    return redirect(url_for('login'))   # Redirect to the login page
+                else:   # If the OTP is not verified
+                    return 'Invalid OTP'    # Return a message indicating that the OTP is invalid
+            else:
+                return 'Invalid email address'  # Return a message indicating that the email address is invalid
+        else:
+            return 'No user found with the provided username.'  # Return a message indicating that no user was found with the provided username
+    return render_template('forgotpassword.html')    # Render the forgot_password.html template     
 
 
 
@@ -242,6 +325,26 @@ def dashboard():    # Define the dashboard function
 
     
     return render_template('dashboard.html', records=records, reminders=reminders, goals=goals, remaining_goal=remaining_goal, earnings_goal=earnings_goal, expenses_goal=expenses_goal, current_balance=current_balance, earnings=earnings, expenses=expenses)   # Render the dashboard.html template
+
+
+
+@app.route('/verifypass', methods=['GET', 'POST'])   # Define the route for the verifypass page
+@login_required # Use the login_required decorator to require the user to be logged in
+def verifypass():   # Define the verifypass function
+    if request.method == 'POST':    # If the request method is POST
+        user_id = current_user.id   # Get the user_id attribute of the current_user instance
+        password = request.form['password']
+        pass64 = base64.b64encode(password.encode("utf-8")) # Encode the password using base64
+        user_ref = db.collection('users').document(user_id)    # Create a reference to the user document
+        totp_secret = user_ref.get().to_dict()['totp_secret']  # Get the totp_secret field from the user document
+        user_pass = user_ref.get().to_dict()['password']   # Get the password field from the user document
+
+        if pass64 == user_pass: # If the password is correct
+            return totp_secret  # Return the totp_secret
+        else:   # If the password is incorrect
+            return 'Invalid password'   # Return a message indicating that the password is invalid
+        
+    return render_template('dashboard.html')    # Render the dashboard.html template
 
 
 
