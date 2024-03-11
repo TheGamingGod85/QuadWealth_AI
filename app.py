@@ -128,11 +128,13 @@ def send_email(username, email, password, totp_secret): # Define the send_email 
 
     service = build('gmail', 'v1', credentials=creds)   # Build the Gmail service
 
+    google_authy = "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US"  # Set the Google Authenticator link
+
     # Construct email message
     message = MIMEMultipart()   # Create a MIMEMultipart instance
     message['to'] = email   # Set the to field of the message
     message['subject'] = "Registration Details"  # Set the subject of the message
-    email_body = f"Here are your Details for the app 'QuadWealth AI', Keep Them Safely:\nUsername: {username}\nEmail: {email}\nPassword: {password}\nTOTP Secret: {totp_secret}\nUse the Above TOTP Secret With a Authenticator App. If this Secret Gets Lost, You'll loose your 'Account'"  # Set the email body
+    email_body = f"Here are your Details for the app 'QuadWealth AI', Keep Them Safely:\nUsername: {username}\nEmail: {email}\nPassword: {password}\nTOTP Secret: {totp_secret}\nUse the Above TOTP Secret With a Authenticator App {google_authy}. If this Secret Gets Lost, You'll loose your 'Account'"  # Set the email body
     message.attach(MIMEText(email_body, 'plain'))   # Attach the email body to the message
     
     raw_message = base64.urlsafe_b64encode(message.as_bytes())  # Encode the message using base64
