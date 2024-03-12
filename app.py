@@ -36,7 +36,7 @@ login_manager.init_app(app) # Initialize the LoginManager instance
 
 
 # Initialize Firestore
-cred = credentials.Certificate('quadbudget-db.json')   # Use the service account key JSON file to initialize the app
+cred = credentials.Certificate('db.json')   # Use the service account key JSON file to initialize the app
 firebase_admin.initialize_app(cred) # Initialize the app with the credentials
 db = firestore.client() # Create an instance of the Firestore client
 
@@ -121,7 +121,7 @@ def send_email(username, email, password, totp_secret): # Define the send_email 
             creds.refresh(Request())    # Refresh the credentials
         else:   # If the credentials are not expired or a refresh token does not exist
             flow = InstalledAppFlow.from_client_secrets_file(   # Create a flow from the client secrets file
-                'quadbudget-mail.json', SCOPES)   # Use the SCOPES list
+                'mail.json', SCOPES)   # Use the SCOPES list
             creds = flow.run_local_server(port=0)   # Run the flow on a local server
         with open('token.json', 'w') as token:  # Open the token.json file in write mode
             token.write(creds.to_json())    # Write the credentials to the file
