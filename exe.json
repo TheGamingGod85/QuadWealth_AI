@@ -1,0 +1,81 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "D:/Projects/Python/QuadBudgetV2/app.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": true
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "D:/Projects/Python/QuadBudgetV2/static/img.ico"
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/QuadBudgetV2/token.json;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/QuadBudgetV2/mail.json;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/QuadBudgetV2/db.json;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/QuadBudgetV2/templates;templates/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/QuadBudgetV2/static;static/"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
