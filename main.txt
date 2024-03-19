@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:readsms/readsms.dart';
+import 'package:http/http.dart' as http;
+import 'package:googleapis/sheets/v4.dart';
+import 'package:googleapis_auth/auth_io.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'SMS to Google Sheets',
+      home: SMSReaderScreen(),
+    );
+  }
+}
+
+class SMSReaderScreen extends StatefulWidget {
+  @override
+  _SMSReaderScreenState createState() => _SMSReaderScreenState();
+}
+
+class _SMSReaderScreenState extends State<SMSReaderScreen> {
+  List<String> bankTransactionMessages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _requestSMSPermission();
+  }
+
+  Future<void> _requestSMSPermission() async {
+    final status = await Permission.sms.request();
+    if (status.isGranted) {
+      _readSMS();
+    } else {
+      // Handle permission denied
+    }
+  }
+
+  Future<void> _readSMS() async {
+    List<SmsMessage> messages = await Readsms.getAllSms;
+    setState(() {
+      bankTransactionMessages = _filterBankTransactions(messages);
+    });
+    _copyToGoogleSheet(bankTransactionMessages);
+  }
+
+  List<String> _filterBankTransactions(List<SmsMessage> messages) {
+    // Implement logic to filter bank transaction messages
+    // Example: Check for keywords like 'deposit', 'withdrawal', etc.
+    List<String> filteredMessages = [];
+    for (var message in messages) {
+      if (message.body.contains('bank')) {
+        filteredMessages.add(message.body);
+      }
+    }
+    return filteredMessages;
+  }
+
+  Future<void> _copyToGoogleSheet(List<String> messages) async {
+    // Authenticate with Google Sheets API
+    final _credentials = ServiceAccountCredentials.fromJson({
+      // Add your credentials here
+    });
+    final _client = await clientViaServiceAccount(_credentials, [
+      'https://www.googleapis.com/auth/spreadsheets',
+    ]);
+    final _sheets = SheetsApi(_client);
+
+    // Write data to Google Sheets
+    final spreadsheetId = 'YOUR_SPREADSHEET_ID';
+    final range = 'Sheet1!A1'; // Change to your desired range
+    final values = messages.map((message) => [message]).toList();
+    final request = ValueRange()..values = values;
+    await _sheets.spreadsheets.values.update(request, spreadsheetId, range,
+        valueInputOption: 'RAW');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SMS to Google Sheets'),
+      ),
+      body: Center(
+        child: bankTransactionMessages.isEmpty
+            ? CircularProgressIndicator()
+            : ListView.builder(
+                itemCount: bankTransactionMessages.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(bankTransactionMessages[index]),
+                  );
+                },
+              ),
+      ),
+    );
+  }
+}
