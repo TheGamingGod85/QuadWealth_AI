@@ -43,7 +43,7 @@ db = firestore.client() # Create an instance of the Firestore client
 
 
 # Define the Generative AI model
-genai.configure(api_key="AIzaSyB5b3yOq6uW3V32P5WeCEDuU-KSGP1hfbU")  # Set the API key for the Generative AI service
+genai.configure(api_key=-KSGP1hfbU")  # Set the API key for the Generative AI service
 generation_config = {
   "temperature": 1,
   "top_p": 1,
